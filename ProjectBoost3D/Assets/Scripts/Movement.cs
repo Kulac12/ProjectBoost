@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     Rigidbody rb;
+    [SerializeField] float mainThrust = 100f; //itme gücü speed gibi
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,7 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            rb.AddRelativeForce(Vector3.up);   
+            rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime );   
             Debug.Log("Press Space - Thrusting");
         }
         
