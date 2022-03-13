@@ -7,11 +7,12 @@ public class Movement : MonoBehaviour
     Rigidbody rb;
     [SerializeField] float mainThrust = 100f; //itme gücü speed gibi
     [SerializeField] float rotationThrust = 1f;
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        audioSource = GetComponent<AudioSource>();  
     }
 
     // Update is called once per frame
@@ -29,7 +30,8 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime );   
-            Debug.Log("Press Space - Thrusting");
+           // Debug.Log("Press Space - Thrusting");
+            audioSource.Play(); 
         }
         
 
@@ -53,7 +55,9 @@ public class Movement : MonoBehaviour
     }
     void ApplyRotation(float rotationThisFrame)
     {
+        rb.freezeRotation = true; // manuel olarak döndðrmek için rotasyonu döndürdüðümüzü söylüyoruz.    
         transform.Rotate(Vector3.forward * rotationThisFrame * Time.deltaTime);
+        rb.freezeRotation = false; // fizik sisteminin bir sorun olurda rotasyonu çözüyoruz
     }
 
 }
