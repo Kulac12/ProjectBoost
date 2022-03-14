@@ -29,9 +29,18 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime );   
-           // Debug.Log("Press Space - Thrusting");
-            audioSource.Play(); 
+            rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime );
+            // Debug.Log("Press Space - Thrusting");
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+
+
+        }
+        else
+        {
+            audioSource.Stop();    
         }
         
 
